@@ -49,14 +49,14 @@ T = 0.02;
 t = 0:1/fs:T-1/fs;   
 N = length(t);          
 
-m1 = sin(2*%pi*200*t);
-m2 = sin(2*%pi*400*t);
-m3 = sin(2*%pi*600*t);
-m4 = sin(2*%pi*800*t);
-m5 = sin(2*%pi*1000*t);
-m6 = sin(2*%pi*1200*t);
+m1 = sin(2*%pi*100*t);
+m2 = sin(2*%pi*200*t);
+m3 = sin(2*%pi*300*t);
+m4 = sin(2*%pi*400*t);
+m5 = sin(2*%pi*500*t);
+m6 = sin(2*%pi*600*t);
 
-fc = [6000 11000 16000 21000 26000 31000]; // Hz
+fc = [6000 12000 18000 24000 30000 36000]; 
 
 s1 = m1 .* cos(2*%pi*fc(1)*t);
 s2 = m2 .* cos(2*%pi*fc(2)*t);
@@ -95,12 +95,12 @@ for k = 1:6
 end
 
 figure(1);
-subplot(3,2,1); plot(t, m1); title("Original m1 (200 Hz)");
-subplot(3,2,2); plot(t, m2); title("Original m2 (400 Hz)");
-subplot(3,2,3); plot(t, m3); title("Original m3 (600 Hz)");
-subplot(3,2,4); plot(t, m4); title("Original m4 (800 Hz)");
-subplot(3,2,5); plot(t, m5); title("Original m5 (1 kHz)");
-subplot(3,2,6); plot(t, m6); title("Original m6 (1.2 kHz)");
+subplot(3,2,1); plot(t, m1); title("Original m1 (100 Hz)");
+subplot(3,2,2); plot(t, m2); title("Original m2 (200 Hz)");
+subplot(3,2,3); plot(t, m3); title("Original m3 (300 Hz)");
+subplot(3,2,4); plot(t, m4); title("Original m4 (400 Hz)");
+subplot(3,2,5); plot(t, m5); title("Original m5 (500 Hz)");
+subplot(3,2,6); plot(t, m6); title("Original m6 (600 Hz)");
 xlabel("Time (s)");
 
 figure(2);
@@ -117,21 +117,26 @@ subplot(3,2,5); plot(t, recovered(5,:)); title("Recovered m5");
 subplot(3,2,6); plot(t, recovered(6,:)); title("Recovered m6");
 xlabel("Time (s)");
 
-disp("FFT-based demux complete. Compare originals vs recovered visually or compute MSE:");
+disp("✅ FFT-based demux complete. Compare originals vs recovered visually or compute MSE:");
 for k=1:6
     mse = sum((recovered(k,:) - eval("m"+string(k))).^2)/N;
     disp("Channel "+string(k)+" MSE = "+string(mse));
 end
+
 ```
 
 ### OUTPUT WAVEFORM:
 
-<img width="1782" height="971" alt="image" src="https://github.com/user-attachments/assets/10ae65d7-848c-42d4-922f-276cf5d2856a" />
+<img width="748" height="604" alt="image" src="https://github.com/user-attachments/assets/9ef25734-95bd-4b82-a6ae-c01ee5993fe9" />
 
-<img width="1548" height="909" alt="image" src="https://github.com/user-attachments/assets/3ae9f393-2508-4462-83ec-3560622466e4" />
+<img width="696" height="566" alt="image" src="https://github.com/user-attachments/assets/fcfeb166-a469-486b-8d65-79fd91b2ecf6" />
 
-<img width="1762" height="968" alt="image" src="https://github.com/user-attachments/assets/c8114c46-1f13-421a-a6e4-cbe6303a8ef5" />
+<img width="739" height="572" alt="image" src="https://github.com/user-attachments/assets/69de2460-9d98-4f91-b2f1-400da0ced430" />
 
+
+### TABULATION:
+![WhatsApp Image 2025-11-28 at 12 51 35_990d4a94](https://github.com/user-attachments/assets/a12a3c72-144b-4064-9961-021f18807ead)
+![WhatsApp Image 2025-11-28 at 12 51 36_897fc6a5](https://github.com/user-attachments/assets/a21a382d-3348-4145-a2d1-245bda534b1d)
 
 
 ### Result:
